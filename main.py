@@ -1,5 +1,5 @@
-import os
 import json
+import os
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 
@@ -41,8 +41,8 @@ def prodlist(path: str) -> list[dict]:
 
 if __name__ == "__main__":
     prod1 = Product("55 QLED 4K", "Фоновая подсветка", 123000.0, 7)
-    catList = []
     prodList = []
+    catList = []
     path_to_json = os.path.join(os.path.dirname(__file__), "data", "products.json")
     prod_full = prodlist(path_to_json)
     print(prod_full)
