@@ -33,6 +33,7 @@ class Category:
 
 
 def prodlist(path: str) -> list[dict]:
+    '''Функция для JSON файла'''
     result = []
     with open(path, encoding="utf8") as json_file:
         result = json.load(json_file)
