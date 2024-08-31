@@ -41,13 +41,10 @@ def prodlist(path: str) -> list[dict]:
 
 
 if __name__ == "__main__":
-    prod1 = Product("55 QLED 4K", "Фоновая подсветка", 123000.0, 7)
     prodList = []
     catList = []
-
-    path_to_json = os.path.join(os.path.dirname(__file__), "data", "products.json")
+    path_to_json = os.path.join(os.path.dirname(__file__), "..", "data", "products.json")
     prod_full = prodlist(path_to_json)
-    print(prod_full)
     for item_cat in prod_full:
         catList.append(
             Category(
