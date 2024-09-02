@@ -28,8 +28,15 @@ class Category:
         self.name = name
         self.description = description
         self.products = products
-        self.number_of_categories += 1
         self.number_of_products += len(products)
+
+    @staticmethod
+    def counter_cat():
+        Category.number_of_categories += 1
+
+    @staticmethod
+    def get_count():
+        return Category.number_of_categories
 
 
 def prodlist(path: str) -> list[dict]:
@@ -43,6 +50,7 @@ def prodlist(path: str) -> list[dict]:
 if __name__ == "__main__":
     prodList = []
     catList = []
+    count = 0
     path_to_json = os.path.join(os.path.dirname(__file__), "..", "data", "products.json")
     prod_full = prodlist(path_to_json)
     for item_cat in prod_full:
@@ -62,6 +70,7 @@ if __name__ == "__main__":
                     item_prod["quantity"],
                 )
             )
+
     for obj in prodList:
         print(obj.name)
         print(obj.description)
@@ -69,8 +78,12 @@ if __name__ == "__main__":
         print(obj.quantity)
 
     for obj in catList:
+        obj.counter_cat()
         print(obj.name)
         print(obj.description)
         print(obj.products)
         print(obj.number_of_products)
-        print(obj.number_of_categories)
+
+    print(Category.get_count())
+
+
