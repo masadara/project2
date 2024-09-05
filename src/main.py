@@ -3,7 +3,8 @@ import os
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 
-class Category():
+
+class Category:
     name: str
     description: str
     products: list
@@ -26,17 +27,20 @@ class Category():
 
     def add_product(self, prod):
         added_list = {}
-        keys = ['name', 'description', 'price', 'quantity']
+        keys = ["name", "description", "price", "quantity"]
         items = [prod.name, prod.description, prod.show_price, prod.quantity]
         for i in range(len(keys)):
             added_list[keys[i]] = items[i]
         self.__products.append(added_list)
+        self.number_of_products += 1
 
     @property
     def show_prod(self):
         result = []
         for prods in self.__products:
-            result.append(f'{prods.get("name")}, {prods.get("price")} руб. Остаток: {prods.get("quantity")} шт.')
+            result.append(
+                f'{prods.get("name")}, {prods.get("price")} руб. Остаток: {prods.get("quantity")} шт.'
+            )
         return result
 
     def display_details(self):
@@ -67,12 +71,13 @@ class Product:
         if self.__price <= 0 or value <= 0:
             raise ValueError("Цена не должна быть нулевая или отрицательная")
         elif self.__price > value:
-            confirmation = input("Цена товара понижается. Вы подтверждаете изменение цены? (y/n)\n")
+            confirmation = input(
+                "Цена товара понижается. Вы подтверждаете изменение цены? (y/n)\n"
+            )
             if confirmation == "y":
                 self.__price = value
             else:
                 print("Изменение цены отменено")
-
 
     @classmethod
     def new_product(cls, product_dict):
@@ -87,9 +92,20 @@ class Product:
                 if product_dict["__price"] > prods.__price:
                     prods.__price = product_dict["__price"]
         if flag == True:
-            prodList.append(cls(product_dict["name"], product_dict["description"], product_dict["__price"], product_dict["quantity"]))
-        return cls(product_dict["name"], product_dict["description"], product_dict["__price"], product_dict["quantity"])
-
+            prodList.append(
+                cls(
+                    product_dict["name"],
+                    product_dict["description"],
+                    product_dict["__price"],
+                    product_dict["quantity"],
+                )
+            )
+        return cls(
+            product_dict["name"],
+            product_dict["description"],
+            product_dict["__price"],
+            product_dict["quantity"],
+        )
 
     def display_details(self):
         print("Название продукта:", self.name)
@@ -97,8 +113,9 @@ class Product:
         print("Цена продукта:", self.__price)
         print("Количество продукта:", self.quantity)
 
+
 def prodlist(path: str) -> list[dict]:
-    '''Функция для JSON файла'''
+    """Функция для JSON файла"""
     result = []
     with open(path, encoding="utf8") as json_file:
         result = json.load(json_file)
@@ -108,7 +125,9 @@ def prodlist(path: str) -> list[dict]:
 if __name__ == "__main__":
     prodList = []
     catList = []
-    path_to_json = os.path.join(os.path.dirname(__file__), "..", "data", "products.json")
+    path_to_json = os.path.join(
+        os.path.dirname(__file__), "..", "data", "products.json"
+    )
     prod_full = prodlist(path_to_json)
     for item_cat in prod_full:
         catList.append(
@@ -131,23 +150,31 @@ if __name__ == "__main__":
     #     category.display_details()
     # print(prodList)
     # print(catList)
-    product1 = Product.new_product({"name": "Xiaomi Redmi Note 112", "description": "ноут норм", "__price": 100, "quantity": 222})
+    product1 = Product.new_product(
+        {
+            "name": "Xiaomi Redmi Note 112",
+            "description": "ноут норм",
+            "__price": 100,
+            "quantity": 222,
+        }
+    )
     # print(prodList)
     # print(product1)
     print(product1.name, product1.description, product1.show_price, product1.quantity)
-    print(prodList[2].show_price)
-    cat_add = input('Введите категорию\n')
+    # print(prodList[2].show_price)
+    cat_add = input("Введите категорию\n")
     for obj in catList:
         obj.counter_cat()
         if obj.name == cat_add:
-            name_add = input('Введите имя товара\n')
-            description_add = input('Введите описание товара\n')
-            price_add = input('Введите цену\n')
-            quantity_add = input('Введите количество\n')
-            obj.add_product(Product(name_add, description_add, float(price_add), int(quantity_add)))
-            obj.number_of_products += 1
+            name_add = input("Введите имя товара\n")
+            description_add = input("Введите описание товара\n")
+            price_add = input("Введите цену\n")
+            quantity_add = input("Введите количество\n")
+            obj.add_product(
+                Product(name_add, description_add, float(price_add), int(quantity_add))
+            )
         else:
-            print('такой категории нет')
+            print("такой категории нет")
 
         print(obj.name)
         print(obj.description)
@@ -164,8 +191,3 @@ if __name__ == "__main__":
         print(obj.description)
         print(obj.show_price)
         print(obj.quantity)
-
-
-
-
-
