@@ -6,7 +6,7 @@ if __name__ == "__main__":
     xiao = Product("Xiaomi Redmi Note 12", "ноут норм", 100, 222)
     realme = Product("Realme NEO GT 5", "нео норм", 150, 15)
     # создадим категорию смартфонов, пока пустую
-    phones_category = Category('Телефоны', 'Сюда будем добавлять смартфоны', [])
+    phones_category = Category("Телефоны", "Сюда будем добавлять смартфоны", [])
     # добавляем экземпляры продуктов
     phones_category.add_product(xiao)
     phones_category.add_product(realme)
@@ -15,10 +15,10 @@ if __name__ == "__main__":
 
     # готовим данные
     product_info = {
-        'name': "Poco X6",
-        'description': 'поко норм',
-        'price': 120,
-        'quantity': 5
+        "name": "Poco X6",
+        "description": "поко норм",
+        "price": 120,
+        "quantity": 5,
     }
     # создаём из словаря продукт
     pocophone = Product.new_product(product_info)

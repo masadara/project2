@@ -57,10 +57,10 @@ def pathjson():
 @pytest.fixture()
 def pocophone():
     product_info = {
-        'name': "Poco X6",
-        'description': 'поко норм',
-        'price': 120,
-        'quantity': 5
+        "name": "Poco X6",
+        "description": "поко норм",
+        "price": 120,
+        "quantity": 5,
     }
     pocophone = Product.new_product(product_info)
     return pocophone
@@ -105,6 +105,7 @@ def test_init_cat(categories):
     ]
     assert categories.number_of_products == 1
     assert categories.number_of_categories == 0
+
 
 def test_add_product(categories, xiao):
     categories.add_product(xiao)

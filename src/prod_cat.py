@@ -42,7 +42,7 @@ class Category:
         result = []
         for prods in self.__products:
             result.append(
-                f'{prods.name}, {prods.price} руб. Остаток: {prods.quantity} шт.'
+                f"{prods.name}, {prods.price} руб. Остаток: {prods.quantity} шт."
             )
             # result.append(prods)
         return result
@@ -91,6 +91,7 @@ class Product:
             product_dict["price"],
             product_dict["quantity"],
         )
+
     # def new_product(cls, product_dict):
     #     """Создаёт новый продукт."""
     #     flag = True
