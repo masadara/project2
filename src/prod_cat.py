@@ -47,6 +47,17 @@ class Category:
             # result.append(prods)
         return result
 
+    def __str__(self):
+        result = []
+        result_str = ""
+        for prods in self.__products:
+            result.append(
+                f"{prods.name}, {prods.price} руб. Остаток: {prods.quantity} шт.; "
+            )
+        for res in result:
+            result_str += res
+        return result_str
+
     def display_details(self):
         print("Название категории:", self.name)
         print("Описание категории:", self.description)
@@ -91,6 +102,9 @@ class Product:
             product_dict["price"],
             product_dict["quantity"],
         )
+
+    def __add__(self, other):
+        return (self.quantity * self.price) + (other.price * other.quantity)
 
     # def new_product(cls, product_dict):
     #     """Создаёт новый продукт."""

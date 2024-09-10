@@ -11,7 +11,10 @@ if __name__ == "__main__":
     phones_category.add_product(xiao)
     phones_category.add_product(realme)
     # вызываем геттер списка строковых представлений продуктов и смотрим, что всё распечатывается
+
     print(phones_category.show_prod)
+    print(phones_category)
+    print(xiao + realme)
 
     # готовим данные
     product_info = {

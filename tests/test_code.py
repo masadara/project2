@@ -72,6 +72,11 @@ def xiao():
 
 
 @pytest.fixture
+def realme():
+    return Product("Realme NEO GT 5", "нео норм", 150, 15)
+
+
+@pytest.fixture
 def products():
     return Product(
         "Samsung Galaxy C23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5
@@ -121,3 +126,7 @@ def test_price(pocophone):
 
 def test_prodlist(pathjson, json_file):
     assert prodlist_path(pathjson) == json_file
+
+
+def test_add(xiao, realme):
+    assert realme + xiao == 24450
