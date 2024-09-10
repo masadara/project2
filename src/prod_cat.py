@@ -48,15 +48,10 @@ class Category:
         return result
 
     def __str__(self):
-        result = []
-        result_str = ""
+        quantity = 0
         for prods in self.__products:
-            result.append(
-                f"{prods.name}, {prods.price} руб. Остаток: {prods.quantity} шт.; "
-            )
-        for res in result:
-            result_str += res
-        return result_str
+            quantity += prods.quantity
+        return f"{self.name}, количество продуктов: {quantity}"
 
     def display_details(self):
         print("Название категории:", self.name)
@@ -93,6 +88,10 @@ class Product:
                 self.__price = value
             else:
                 print("Изменение цены отменено")
+
+
+    def __str__(self):
+        return f"{self.name}, {self.price} руб. Остаток: {self.quantity} шт.; "
 
     @classmethod
     def new_product(cls, product_dict):
