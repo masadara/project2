@@ -1,5 +1,6 @@
 import pytest
 from src.prod_cat import Product, Category, prodlist_path
+from src.Smart_Grass import Smartphone, LawnGrass
 import os
 
 
@@ -91,6 +92,16 @@ def categories(products):
         [products],
     )
 
+@pytest.fixture()
+def smart_fixture():
+    return Smartphone("высокая", "realme", 1024, "blue", "realme ultra pro max se 10", "bad", 10, 1500)
+
+
+@pytest.fixture()
+def grass_fixture():
+    return LawnGrass("russia", 1, "blue", "северное сияние", "5+", 199, 999)
+
+
 
 def test_init_prod(products):
     assert products.name == "Samsung Galaxy C23 Ultra"
@@ -118,6 +129,8 @@ def test_add_product(categories, xiao):
         "Samsung Galaxy C23 Ultra, 180000.0 руб. Остаток: 5 шт.",
         "Xiaomi Redmi Note 12, 100 руб. Остаток: 222 шт.",
     ]
+    with pytest.raises(TypeError):
+        categories.add_product(categories)
 
 
 def test_price(pocophone):
@@ -128,5 +141,9 @@ def test_prodlist(pathjson, json_file):
     assert prodlist_path(pathjson) == json_file
 
 
-def test_add(xiao, realme):
+def test_add(xiao, realme, grass_fixture):
     assert realme + xiao == 24450
+    with pytest.raises(TypeError):
+        realme + grass_fixture
+
+

@@ -1,5 +1,6 @@
 import json
 import os
+# from src.Smart_Grass import Smartphone, LawnGrass
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 
@@ -34,8 +35,11 @@ class Category:
     #     self.__products.append(added_list)
     #     self.number_of_products += 1
     def add_product(self, product):
-        self.number_of_products += 1
-        self.__products.append(product)
+        if issubclass(product.__class__, Product):
+            self.number_of_products += 1
+            self.__products.append(product)
+        else:
+            raise TypeError
 
     @property
     def show_prod(self):

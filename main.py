@@ -10,6 +10,7 @@ if __name__ == "__main__":
     realme_smart = Smartphone("высокая", "realme", 1024, "blue", "realme ultra pro max se 10", "bad", 10, 1500)
     # создадим категорию смартфонов, пока пустую
     phones_category = Category("Телефоны", "Сюда будем добавлять смартфоны", [])
+    phones_category2 = Category("Телефоны2", "Сюда будем добавлять смартфоны", [])
     # добавляем экземпляры продуктов
     phones_category.add_product(xiao)
     phones_category.add_product(realme)
