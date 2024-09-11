@@ -103,7 +103,9 @@ class Product:
         )
 
     def __add__(self, other):
-        return (self.quantity * self.price) + (other.price * other.quantity)
+        if type(self) == type(other):
+            return (self.quantity * self.price) + (other.price * other.quantity)
+        raise TypeError
 
     # def new_product(cls, product_dict):
     #     """Создаёт новый продукт."""
