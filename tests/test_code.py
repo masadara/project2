@@ -92,15 +92,17 @@ def categories(products):
         [products],
     )
 
+
 @pytest.fixture()
 def smart_fixture():
-    return Smartphone("высокая", "realme", 1024, "blue", "realme ultra pro max se 10", "bad", 10, 1500)
+    return Smartphone(
+        "высокая", "realme", 1024, "blue", "realme ultra pro max se 10", "bad", 10, 1500
+    )
 
 
 @pytest.fixture()
 def grass_fixture():
     return LawnGrass("russia", 1, "blue", "северное сияние", "5+", 199, 999)
-
 
 
 def test_init_prod(products):
@@ -145,5 +147,3 @@ def test_add(xiao, realme, grass_fixture):
     assert realme + xiao == 24450
     with pytest.raises(TypeError):
         realme + grass_fixture
-
-

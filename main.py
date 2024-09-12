@@ -1,5 +1,5 @@
-from src.prod_cat import Product, Category, prodlist_path
-from src.Smart_Grass import Smartphone, LawnGrass
+from src.prod_cat import Category, Product
+from src.Smart_Grass import LawnGrass, Smartphone
 
 if __name__ == "__main__":
     prod_list = []
@@ -7,7 +7,9 @@ if __name__ == "__main__":
     xiao = Product("Xiaomi Redmi Note 12", "ноут норм", 100, 222)
     realme = Product("Realme NEO GT 5", "нео норм", 150, 15)
     grass = LawnGrass("russia", 1, "blue", "северное сияние", "5+", 199, 999)
-    realme_smart = Smartphone("высокая", "realme", 1024, "blue", "realme ultra pro max se 10", "bad", 10, 1500)
+    realme_smart = Smartphone(
+        "высокая", "realme", 1024, "blue", "realme ultra pro max se 10", "bad", 10, 1500
+    )
     # создадим категорию смартфонов, пока пустую
     phones_category = Category("Телефоны", "Сюда будем добавлять смартфоны", [])
     phones_category2 = Category("Телефоны2", "Сюда будем добавлять смартфоны", [])

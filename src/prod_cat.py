@@ -1,5 +1,6 @@
 import json
 import os
+
 # from src.Smart_Grass import Smartphone, LawnGrass
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -57,11 +58,11 @@ class Category:
             quantity += prods.quantity
         return f"{self.name}, количество продуктов: {quantity}"
 
-    def display_details(self):
-        print("Название категории:", self.name)
-        print("Описание категории:", self.description)
-        for prod in self.show_prod:
-            print(prod)
+    # def display_details(self):
+    #     print("Название категории:", self.name)
+    #     print("Описание категории:", self.description)
+    #     for prod in self.show_prod:
+    #         print(prod)
 
 
 class Product:
@@ -92,7 +93,6 @@ class Product:
                 self.__price = value
             else:
                 print("Изменение цены отменено")
-
 
     def __str__(self):
         return f"{self.name}, {self.price} руб. Остаток: {self.quantity} шт.; "
@@ -138,11 +138,11 @@ class Product:
     #         product_dict["quantity"],
     #     )
 
-    def display_details(self):
-        print("Название продукта:", self.name)
-        print("Описание продукта:", self.description)
-        print("Цена продукта:", self.__price)
-        print("Количество продукта:", self.quantity)
+    # def display_details(self):
+    #     print("Название продукта:", self.name)
+    #     print("Описание продукта:", self.description)
+    #     print("Цена продукта:", self.__price)
+    #     print("Количество продукта:", self.quantity)
 
 
 def prodlist_path(path: str) -> list[dict]:
