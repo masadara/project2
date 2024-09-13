@@ -1,10 +1,12 @@
 from src.prod_cat import Category, Product
 from src.Smart_Grass import LawnGrass, Smartphone
+from src.base_prod import order
 
 if __name__ == "__main__":
     prod_list = []
     # создадим пару продуктов
     xiao = Product("Xiaomi Redmi Note 12", "ноут норм", 100, 222)
+    # print(xiao.__annotations__)
     realme = Product("Realme NEO GT 5", "нео норм", 150, 15)
     grass = LawnGrass("russia", 1, "blue", "северное сияние", "5+", 199, 999)
     realme_smart = Smartphone(
@@ -17,6 +19,8 @@ if __name__ == "__main__":
     phones_category.add_product(xiao)
     phones_category.add_product(realme)
     phones_category.add_product(realme_smart)
+    buy = order("Xiaomi Redmi Note 12", 220)
+    print(buy.pirchase(xiao))
     # вызываем геттер списка строковых представлений продуктов и смотрим, что всё распечатывается
     print(realme_smart)
     print(grass)

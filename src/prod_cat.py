@@ -1,12 +1,11 @@
 import json
 import os
-
-# from src.Smart_Grass import Smartphone, LawnGrass
+from src.base_prod import BaseProduct, Mixin, Base_cat_order
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 
 
-class Category:
+class Category(Base_cat_order):
     name: str
     description: str
     products: list
@@ -18,6 +17,7 @@ class Category:
         self.description = description
         self.__products = products
         self.number_of_products += len(products)
+        super().__init__()
 
     @staticmethod
     def counter_cat():
@@ -65,7 +65,7 @@ class Category:
     #         print(prod)
 
 
-class Product:
+class Product(Mixin, BaseProduct):
     name: str
     description: str
     __price: float
@@ -76,6 +76,7 @@ class Product:
         self.description = description
         self.__price = price
         self.quantity = quantity
+        super().__init__()
 
     @property
     def price(self):

@@ -1,6 +1,7 @@
 import pytest
 from src.prod_cat import Product, Category, prodlist_path
 from src.Smart_Grass import Smartphone, LawnGrass
+from src.base_prod import BaseProduct, Mixin
 import os
 
 
@@ -147,3 +148,7 @@ def test_add(xiao, realme, grass_fixture):
     assert realme + xiao == 24450
     with pytest.raises(TypeError):
         realme + grass_fixture
+
+
+def test_mixin():
+    assert Mixin.__class__.__name__ == "type"

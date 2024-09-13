@@ -1,6 +1,7 @@
 from src.prod_cat import Product, Category, prodlist_path
+from src.base_prod import Mixin
 
-class Smartphone(Product):
+class Smartphone(Product, Mixin):
     efficiency: str
     model: str
     memory: int
@@ -13,7 +14,7 @@ class Smartphone(Product):
         self.memory = memory
         self.color = color
 
-class LawnGrass(Product):
+class LawnGrass(Product, Mixin):
     country: str
     germination_period: int
     color: str
