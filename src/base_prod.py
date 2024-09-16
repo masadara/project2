@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from src.exception_class import MeException, ShellScriptEmpty
 
 
 class BaseProduct(ABC):
@@ -38,6 +39,9 @@ class order(Base_cat_order):
     def __init__(self, name_purchase, quantity):
         self.name_purchase = name_purchase
         self.quantity = quantity
+        if quantity == 0:
+            print("Товар с нулевым количеством не может быть добавлен")
+            raise ValueError
         super().__init__()
 
     def pirchase(self, prod):

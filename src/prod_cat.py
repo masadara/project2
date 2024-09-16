@@ -1,6 +1,7 @@
 import json
 import os
 from src.base_prod import BaseProduct, Mixin, Base_cat_order
+from src.exception_class import MeException
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 
@@ -42,6 +43,7 @@ class Category(Base_cat_order):
         else:
             raise TypeError
 
+
     @property
     def show_prod(self):
         result = []
@@ -57,6 +59,17 @@ class Category(Base_cat_order):
         for prods in self.__products:
             quantity += prods.quantity
         return f"{self.name}, количество продуктов: {quantity}"
+
+    def av_price(self):
+        summ = 0
+        quantity_full = 0
+        try:
+            for prods in self.__products:
+                summ += prods.price
+                quantity_full += 1
+            return summ / quantity_full
+        except ZeroDivisionError as e:
+            return 0
 
     # def display_details(self):
     #     print("Название категории:", self.name)
@@ -76,6 +89,9 @@ class Product(Mixin, BaseProduct):
         self.description = description
         self.__price = price
         self.quantity = quantity
+        if quantity == 0:
+            print("Товар с нулевым количеством не может быть добавлен")
+            raise ValueError
         super().__init__()
 
     @property
@@ -154,73 +170,73 @@ def prodlist_path(path: str) -> list[dict]:
     return result
 
 
-if __name__ == "__main__":
-    prod_list = []
-    cat_list = []
-    path_to_json = os.path.join(
-        os.path.dirname(__file__), "..", "data", "products.json"
-    )
-    prod_full = prodlist_path(path_to_json)
-    # print(prod_full)
-    for item in prod_full:
-        category = Category(item["name"], item["description"], [])
-        # print(item["products"])
-        for items in item["products"]:
-            # print(items["name"])
-            prod_curr = Product(
-                items["name"],
-                items["description"],
-                items["price"],
-                items["quantity"],
-            )
-
-            category.add_product(prod_curr)
-            prod_list.append(prod_curr)
-        cat_list.append(category)
-    # print(cat_list[1].show_prod[0].name)
-    # for category in catList:
-    #     category.display_details()
-    # print(prodList)
-    # print(catList)
-    # product1 = Product.new_product(
-    #     {
-    #         "name": "Xiaomi Redmi Note 112",
-    #         "description": "ноут норм",
-    #         "__price": 100,
-    #         "quantity": 222,
-    #     }
-    # )
-    # # print(prodList)
-    # # print(product1)
-    # print(product1.name, product1.description, product1.show_price, product1.quantity)
-    # # print(prodList[2].show_price)
-    # cat_add = input("Введите категорию\n")
-    # for obj in catList:
-    #     obj.counter_cat()
-    #     if obj.name == cat_add:
-    #         name_add = input("Введите имя товара\n")
-    #         description_add = input("Введите описание товара\n")
-    #         price_add = input("Введите цену\n")
-    #         quantity_add = input("Введите количество\n")
-    #         obj.add_product(
-    #             Product(name_add, description_add, float(price_add), int(quantity_add))
-    #         )
-    #     else:
-    #         print("такой категории нет")
-    #
-    #     print(obj.name)
-    #     print(obj.description)
-    #     print(obj.show_prod)
-    #     print(obj.number_of_products)
-    # #
-    # print(Category.get_count())
-    # print(prod_List[4].name)
-    # prod_List[4].show_price = 1000
-    # prod_List[4].show_price = 1000
-    # print(prod_List[4].show_price)
-    # for obj in prod_List:
-    #     print(obj.name)
-    #     print(obj.description)
-    #     print(obj.show_price)
-    #     print(obj.quantity)
-    print(cat_list[0].show_prod)
+# if __name__ == "__main__":
+#     prod_list = []
+#     cat_list = []
+#     path_to_json = os.path.join(
+#         os.path.dirname(__file__), "..", "data", "products.json"
+#     )
+#     prod_full = prodlist_path(path_to_json)
+#     # print(prod_full)
+#     for item in prod_full:
+#         category = Category(item["name"], item["description"], [])
+#         # print(item["products"])
+#         for items in item["products"]:
+#             # print(items["name"])
+#             prod_curr = Product(
+#                 items["name"],
+#                 items["description"],
+#                 items["price"],
+#                 items["quantity"],
+#             )
+#
+#             category.add_product(prod_curr)
+#             prod_list.append(prod_curr)
+#         cat_list.append(category)
+#     # print(cat_list[1].show_prod[0].name)
+#     # for category in catList:
+#     #     category.display_details()
+#     # print(prodList)
+#     # print(catList)
+#     # product1 = Product.new_product(
+#     #     {
+#     #         "name": "Xiaomi Redmi Note 112",
+#     #         "description": "ноут норм",
+#     #         "__price": 100,
+#     #         "quantity": 222,
+#     #     }
+#     # )
+#     # # print(prodList)
+#     # # print(product1)
+#     # print(product1.name, product1.description, product1.show_price, product1.quantity)
+#     # # print(prodList[2].show_price)
+#     # cat_add = input("Введите категорию\n")
+#     # for obj in catList:
+#     #     obj.counter_cat()
+#     #     if obj.name == cat_add:
+#     #         name_add = input("Введите имя товара\n")
+#     #         description_add = input("Введите описание товара\n")
+#     #         price_add = input("Введите цену\n")
+#     #         quantity_add = input("Введите количество\n")
+#     #         obj.add_product(
+#     #             Product(name_add, description_add, float(price_add), int(quantity_add))
+#     #         )
+#     #     else:
+#     #         print("такой категории нет")
+#     #
+#     #     print(obj.name)
+#     #     print(obj.description)
+#     #     print(obj.show_prod)
+#     #     print(obj.number_of_products)
+#     # #
+#     # print(Category.get_count())
+#     # print(prod_List[4].name)
+#     # prod_List[4].show_price = 1000
+#     # prod_List[4].show_price = 1000
+#     # print(prod_List[4].show_price)
+#     # for obj in prod_List:
+#     #     print(obj.name)
+#     #     print(obj.description)
+#     #     print(obj.show_price)
+#     #     print(obj.quantity)
+#     print(cat_list[0].show_prod)
